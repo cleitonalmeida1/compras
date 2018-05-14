@@ -2,12 +2,17 @@ package br.com.analise.compras.Entity;
 
 
 import br.com.analise.compras.Entity.enumeration.EstadoPagamentoEnum;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
@@ -18,6 +23,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "tb_pagamento")
+@Inheritance(strategy = InheritanceType.JOINED)
 @SequenceGenerator(name = "seq_pagamento", sequenceName = "seq_pagamento")
 public class Pagamento implements Serializable{
 
@@ -27,8 +33,10 @@ public class Pagamento implements Serializable{
     private Integer id;
 
     @Column(name = "pa_estado")
+    @Enumerated(EnumType.STRING)
     private EstadoPagamentoEnum estado;
 
+    @JsonIgnore
     @OneToOne
     @JoinColumn(name = "pe_id")
     @MapsId

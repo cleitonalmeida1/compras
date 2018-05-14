@@ -1,5 +1,7 @@
 package br.com.analise.compras.Entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,7 +16,9 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "tb_pedido")
@@ -26,6 +30,7 @@ public class Pedido implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "seq_pedido")
     private Integer id;
 
+    @JsonFormat(pattern = "dd/MM/yyyy hh:mm")
     @Column(name = "pe_instante")
     private Date instante;
 
@@ -40,16 +45,26 @@ public class Pedido implements Serializable {
     @JoinColumn(name = "cl_id")
     private Cliente cliente;
 
+    @OneToMany(mappedBy = "id.pedido")
+    private Set<ItemPedido> itens = new HashSet<>();
+
     public Pedido() {
 
     }
 
-    public Pedido(Integer id, Date instante, Pagamento pagamento, Endereco enderecoDeEntrega, Cliente cliente) {
+    public Pedido(Integer id, Date instante, Endereco enderecoDeEntrega, Cliente cliente) {
         this.id = id;
         this.instante = instante;
-        this.pagamento = pagamento;
         this.enderecoDeEntrega = enderecoDeEntrega;
         this.cliente = cliente;
+    }
+
+    public Set<ItemPedido> getItens() {
+        return itens;
+    }
+
+    public void setItens(Set<ItemPedido> itens) {
+        this.itens = itens;
     }
 
     public Integer getId() {
