@@ -35,9 +35,9 @@ import java.util.Arrays;
 import java.util.List;
 
 @SpringBootApplication
-public class ComprasApplication implements CommandLineRunner {
+public class ComprasApplication {
 
-    @Autowired
+  /*  @Autowired
     private CategoriaRepository categoriaRepository;
 
     @Autowired
@@ -62,11 +62,12 @@ public class ComprasApplication implements CommandLineRunner {
     private PagamentoRepository pagamentoRepository;
 
     @Autowired
-    private ItemPedidoRepository itemPedidoRepository;
+    private ItemPedidoRepository itemPedidoRepository;*/
 
     public static void main(String[] args) {
         SpringApplication.run(ComprasApplication.class, args);
     }
+/*
 
     @Override
     public void run(String... strings) throws Exception {
@@ -146,4 +147,5 @@ public class ComprasApplication implements CommandLineRunner {
 
         itemPedidoRepository.save(Arrays.asList(ip1, ip2, ip3));
     }
+*/
 }

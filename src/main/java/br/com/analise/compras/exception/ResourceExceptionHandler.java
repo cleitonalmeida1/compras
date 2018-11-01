@@ -13,4 +13,9 @@ public class ResourceExceptionHandler {
         StandardError error = new StandardError(HttpStatus.NOT_FOUND.value(), e.getMessage(), System.currentTimeMillis());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
     }
+    @ExceptionHandler(ObjectPossuiDependenciaException.class)
+    public ResponseEntity<StandardError> montarExceptionInternalError(ObjectNotFountException e){
+        StandardError error = new StandardError(HttpStatus.FAILED_DEPENDENCY.value(), e.getMessage(), System.currentTimeMillis());
+        return ResponseEntity.status(HttpStatus.FAILED_DEPENDENCY).body(error);
+    }
 }
