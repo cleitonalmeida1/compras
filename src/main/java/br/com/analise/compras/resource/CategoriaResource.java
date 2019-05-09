@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "/categorias")
-@CrossOrigin("http://localhost:8081")
+@CrossOrigin("http://localhost:8082")
 public class CategoriaResource {
 
     @Autowired
